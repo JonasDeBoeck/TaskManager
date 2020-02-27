@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+</head>
+<body>
+<form action="/tasks/new" method="post">
+    <p>
+        <label for="Naam">Naam</label>
+        <input type="text" id="Naam" name="naam" required>
+    </p>
+    <p>
+        <label for="Description">Description</label>
+        <textarea id="Description" name="description" required></textarea>
+    </p>
+    <p>
+        <label for="Datum">Due date</label>
+        <input type="datetime-local" id="Datum" name="datum">
+    </p>
+    <input type="Submit" value="Add task">
+</form>
+</body>
+</html>
