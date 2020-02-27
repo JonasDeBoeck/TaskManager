@@ -5,10 +5,9 @@ import com.example.pe.services.TaakService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Controller
 public class TaakController {
@@ -37,9 +36,11 @@ public class TaakController {
         return "addTask";
     }
 
+
+    //TODO Betere oplossing met @ModelAttribute
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute Taak taak){
-        taakService.addTask(taak);
+    public String addTask(@RequestParam(name = "datum") String datum, @RequestParam(name = "naam") String naam, @RequestParam(name = "description") String description){
+        taakService.addTask(naam, description, datum);
         return "redirect:/tasks";
     }
 }

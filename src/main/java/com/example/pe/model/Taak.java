@@ -3,7 +3,7 @@ package com.example.pe.model;
 import java.time.LocalDateTime;
 
 public class Taak {
-    private String naam, description;
+    private String naam, description, tijdVdDag;
     private LocalDateTime datum;
     private int id;
 
@@ -12,6 +12,7 @@ public class Taak {
         setDatum(datum);
         setDescription(description);
         setId(id);
+        setTijdVdDag();
     }
 
     public Taak () {
@@ -26,11 +27,20 @@ public class Taak {
         }
     }
 
-    private void setDatum(LocalDateTime datum) {
+    public void setDatum(LocalDateTime datum) {
         if (datum == null) {
             throw new IllegalArgumentException("Geef een datum op!");
         } else {
             this.datum = datum;
+        }
+    }
+
+    private void setTijdVdDag () {
+        if (datum.getHour() > 12) {
+            this.tijdVdDag = "PM";
+            setDatum(this.datum.minusHours(12));
+        } else {
+            this.tijdVdDag = "AM";
         }
     }
 
@@ -54,12 +64,8 @@ public class Taak {
         return id;
     }
 
-    public String getHours () {
-        if (datum.getHour() > 12) {
-            return datum.getHour() - 12 + " PM";
-        } else {
-            return datum.getHour() + " AM";
-        }
+    public String getTijdVdDag () {
+        return this.tijdVdDag;
     }
 
     public String getNaam() {

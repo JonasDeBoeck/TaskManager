@@ -8,6 +8,6 @@ import java.util.List;
 public interface TaakService {
     List<Taak> getTaken();
     Taak getTaak(int id);
-    void addTask(Taak taak);
+    void addTask(String titel, String description, String localDate);
     int getLastId();
 }
