@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TaakService {
     List<Taak> getTaken();
+    Taak getTaak(int id);
 }

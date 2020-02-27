@@ -3,12 +3,16 @@ package com.example.pe.model;
 import java.time.LocalDateTime;
 
 public class Taak {
-    private String naam;
+    private String naam, description, titel;
     private LocalDateTime datum;
+    private int id;
 
-    public Taak (String naam, LocalDateTime datum) {
+    public Taak (String naam, LocalDateTime datum, String description, String titel, int id) {
         setNaam(naam);
         setDatum(datum);
+        setDescription(description);
+        setTitel(titel);
+        setId(id);
     }
 
     private void setNaam(String naam) {
@@ -25,6 +29,38 @@ public class Taak {
         } else {
             this.datum = datum;
         }
+    }
+
+    private void setDescription(String description) {
+        if (description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Geef een beschrijving op!");
+        } else {
+            this.description = description;
+        }
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setTitel(String titel) {
+        if (titel.trim().isEmpty()) {
+            throw new IllegalArgumentException("Geef een titel op!");
+        } else {
+            this.titel = titel;
+        }
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getHours () {

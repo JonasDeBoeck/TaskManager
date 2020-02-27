@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Task detail</title>
+</head>
+<body>
+<h2>Task detail</h2>
+<th:block th:if="${task != null}">
+<table>
+    <tr>
+        <th>Title:</th>
+        <td th:text="${task.titel}"></td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td th:text="${task.description}"></td>
+    </tr>
+    <tr>
+        <th>Due date:</th>
+        <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.getHours()}"></td>
+    </tr>
+</table>
+</th:block>
+<th:block th:if="${task == null}">
+<p>Task not found</p>
+</th:block>
+</body>
+</html>
