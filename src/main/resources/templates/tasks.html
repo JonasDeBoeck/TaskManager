@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<ul>
+    <th:block th:if="${not #lists.isEmpty(tasks)}" th:each="taak : ${tasks}">
+        <li th:text="${taak.naam} + ': due ' + ${taak.datum.getMonth()} + ' ' + ${taak.datum.getDayOfMonth()} + ' ' + ${taak.datum.getYear()} + ' at ' + ${taak.getHours()}"></li>
+    </th:block>
+    <th:block th:if="${#lists.isEmpty(tasks)}">
+        <p>There are no tasks left to do.</p>
+    </th:block>
+</ul>
+</body>
+</html>
