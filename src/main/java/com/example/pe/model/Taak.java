@@ -1,22 +1,23 @@
 package com.example.pe.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class Taak {
-    private String naam, description, tijdVdDag;
+    @NotEmpty
+    private String naam, description;
+    private String tijdVdDag;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datum;
     private int id;
 
-    public Taak (String naam, LocalDateTime datum, String description, int id) {
+    public Taak (String naam, LocalDateTime datum, String description) {
         setNaam(naam);
         setDatum(datum);
         setDescription(description);
-        setId(id);
         setTijdVdDag();
-    }
-
-    public Taak () {
-
     }
 
     private void setNaam(String naam) {

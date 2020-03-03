@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Controller
@@ -36,11 +37,9 @@ public class TaakController {
         return "addTask";
     }
 
-
-    //TODO Betere oplossing met @ModelAttribute
     @PostMapping("/tasks/new")
-    public String addTask(@RequestParam(name = "datum") String datum, @RequestParam(name = "naam") String naam, @RequestParam(name = "description") String description){
-        taakService.addTask(naam, description, datum);
+    public String addTask(@ModelAttribute @Valid Taak taak){
+        taakService.addTask(taak);
         return "redirect:/tasks";
     }
 }
