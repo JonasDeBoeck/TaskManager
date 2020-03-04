@@ -63,6 +63,17 @@ public class TaakServiceImpl implements TaakService{
         return getTaak(id).getSubtaken();
     }
 
+    @Override
+    public List<Taak> searchTaak(String naam) {
+        List<Taak> juisteNaam = new ArrayList<>();;
+        for (Taak taak : taken) {
+            if (taak.getNaam().equals(naam)) {
+                juisteNaam.add(taak);
+            }
+        }
+        return juisteNaam;
+    }
+
     public List<Taak> getTaken() {
         return taken;
     }

@@ -12,9 +12,9 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <a class="navbar-brand" href="/">Logo</a>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-between">
         <ul class="navbar-nav">
+            <a class="navbar-brand" href="/">Logo</a>
             <li class="nav-item">
                 <a class="nav-link" href="/tasks">Tasks</a>
             </li>
@@ -22,6 +22,10 @@
                 <a class="nav-link" href="/tasks/new">Add</a>
             </li>
         </ul>
+        <form class="form-inline" action="/tasks/search" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </nav>
 </header>
 <div class="d-flex justify-content-center">

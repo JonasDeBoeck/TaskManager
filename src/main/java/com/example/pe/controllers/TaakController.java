@@ -67,4 +67,10 @@ public class TaakController {
         taakService.addSubtaak(taak, id);
         return "redirect:/tasks/" + id;
     }
+
+    @GetMapping("/tasks/search")
+    public String searchTask (Model model, @RequestParam(name = "naam")String naam) {
+        model.addAttribute("gevonden", taakService.searchTaak(naam));
+        return "searchResultaat";
+    }
 }

@@ -9,15 +9,18 @@ ul {
 }
 
 a {
+    display: block;
     font-size: 70px;
     color: white;
     text-decoration: none;
     cursor: pointer;
-    padding: 50px;
+    padding: 20px;
 }
 
 li {
-    display: block;
+    width: 30%;
+    border: 2px solid white;
+    text-align: center;
 }
 
 li:nth-of-type(2) {
