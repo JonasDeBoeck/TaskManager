@@ -42,4 +42,16 @@ public class TaakController {
         taakService.addTask(taak);
         return "redirect:/tasks";
     }
+
+    @GetMapping("/tasks/edit/{id}")
+    public String showEditTask (Model model, @PathVariable("id") int id) {
+        model.addAttribute("task", taakService.getTaak(id));
+        return "editTask";
+    }
+
+    @PostMapping("/tasks/edit/{id}")
+    public String editTask (Model model, @PathVariable("id") int id, @RequestParam(name = "naam") String naam, @RequestParam(name = "description") String description, @RequestParam(name = "datum") LocalDateTime localDateTime) {
+        taakService.editTaak(naam, description, localDateTime, id);
+        return "redirect:/tasks/" + id;
+    }
 }

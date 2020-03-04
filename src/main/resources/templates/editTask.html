@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Task detail</title>
+    <title>Edit task</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -24,33 +24,23 @@
     </nav>
 </header>
 <div class="d-flex justify-content-center">
-<main class="w-75 mt-3">
-    <article class="w-100">
-    <h2>Task detail</h2>
-    <th:block th:if="${task != null}">
-        <table class="table">
-            <tr>
-                <th class="thead-dark">Title:</th>
-                <td th:text="${task.naam}"></td>
-            </tr>
-            <tr>
-                <th class="thead-dark">Description:</th>
-                <td th:text="${task.description}"></td>
-            </tr>
-            <tr>
-                <th class="thead-dark">Due date:</th>
-                <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()} + ' ' + ${task.tijdVdDag}"></td>
-            </tr>
-        </table>
-        <form th:action="${'/tasks/edit/' + task.id}" method="get">
-            <input type="submit" value="Edit" class="btn btn-primary mb-2">
+    <main class="w-75 mt-3">
+        <form th:action="${'/tasks/edit/' + task.id}" method="post" class="w-100">
+            <div class="form-group">
+                <label for="Naam">Naam</label>
+                <input type="text" id="Naam" name="naam" required class="form-control" th:value="${task.naam}">
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea id="Description" name="description" required class="form-control" style="resize: none" th:text="${task.description}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Datum">Due date</label>
+                <input type="datetime-local" id="Datum" name="datum" required class="form-control" value="${task.datum}">
+            </div>
+            <input type="Submit" value="Change" class="btn btn-primary mb-2">
         </form>
-    </th:block>
-    <th:block th:if="${task == null}">
-        <p>Task not found</p>
-    </th:block>
-    </article>
-</main>
+    </main>
 </div>
 </body>
 </html>

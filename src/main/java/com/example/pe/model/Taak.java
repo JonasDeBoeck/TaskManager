@@ -9,7 +9,7 @@ public class Taak {
     @NotEmpty
     private String naam, description;
     private String tijdVdDag;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datum;
     private int id;
 
@@ -20,7 +20,7 @@ public class Taak {
         setTijdVdDag();
     }
 
-    private void setNaam(String naam) {
+    public void setNaam(String naam) {
         if (naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Naam moet ingevuld zijn!");
         } else {
@@ -45,7 +45,7 @@ public class Taak {
         }
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Geef een beschrijving op!");
         } else {

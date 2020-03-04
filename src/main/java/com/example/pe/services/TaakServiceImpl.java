@@ -45,6 +45,14 @@ public class TaakServiceImpl implements TaakService{
         return taken.get(taken.size()-1).getId();
     }
 
+    @Override
+    public void editTaak(String naam, String description, LocalDateTime localDateTime, int id) {
+        Taak taak = this.getTaak(id);
+        taak.setNaam(naam);
+        taak.setDescription(description);
+        taak.setDatum(localDateTime);
+    }
+
     public List<Taak> getTaken() {
         return taken;
     }
