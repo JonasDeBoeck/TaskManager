@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Task</title>
+    <title>Create Subtask</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -25,23 +25,24 @@
     </nav>
 </header>
 <div class="d-flex justify-content-center">
-<main class="w-75 mt-3">
-<form action="/tasks/new" method="post" class="w-100">
-    <div class="form-group">
-        <label for="Naam">Naam</label>
-        <input type="text" id="Naam" name="naam" required class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea id="Description" name="description" required class="form-control" style="resize: none"></textarea>
-    </div>
-    <div class="form-group">
-        <label for="Datum">Due date</label>
-        <input type="datetime-local" id="Datum" name="datum" required class="form-control">
-    </div>
-    <input type="Submit" value="Add task" class="btn btn-primary mb-2">
-</form>
-</main>
+    <main class="w-75 mt-3">
+        <h2 th:text="'Creating subtask for ' + ${task.naam}"></h2>
+        <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="post" class="w-100">
+            <div class="form-group">
+                <label for="Naam">Naam</label>
+                <input type="text" id="Naam" name="naam" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea id="Description" name="description" required class="form-control" style="resize: none"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Datum">Due date</label>
+                <input type="datetime-local" id="Datum" name="datum" required class="form-control">
+            </div>
+            <input type="Submit" value="Create" class="btn btn-primary mb-2">
+        </form>
+    </main>
 </div>
 </body>
 </html>

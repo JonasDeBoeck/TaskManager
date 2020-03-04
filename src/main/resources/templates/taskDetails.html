@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Task detail</title>
+    <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -45,6 +46,23 @@
         <form th:action="${'/tasks/edit/' + task.id}" method="get">
             <input type="submit" value="Edit" class="btn btn-primary mb-2">
         </form>
+        <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="get">
+            <input type="submit" value="Create subtask" class="btn btn-primary mb-2">
+        </form>
+        <th:block th:if="${not #lists.isEmpty(subtaken)}">
+            <div id="downArrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12zm-18.005-1.568l1.415-1.414 4.59 4.574 4.579-4.574 1.416 1.414-5.995 5.988-6.005-5.988z"/></svg>
+            </div>
+            <div id="upArrow" style="display: none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 7.58l5.995 5.988-1.416 1.414-4.579-4.574-4.59 4.574-1.416-1.414 6.006-5.988z"/></svg>
+            </div>
+            <br>
+            <ul style="display: none" id="subTasks" class="w-100">
+                <th:block th:each="sub : ${subtaken}">
+                    <li class="list-group-item" th:text="${sub.naam} + ': due ' + ${sub.datum.getMonth()} + ' ' + ${sub.datum.getDayOfMonth()} + ' ' + ${sub.datum.getYear()} + ' at ' + ${sub.datum.getHour()} + ':' + ${sub.datum.getMinute()}  + ' ' + ${sub.tijdVdDag}"></li>
+                </th:block>
+            </ul>
+        </th:block>
     </th:block>
     <th:block th:if="${task == null}">
         <p>Task not found</p>
@@ -52,5 +70,6 @@
     </article>
 </main>
 </div>
+<script src="/subtasks.js"></script>
 </body>
 </html>

@@ -53,6 +53,16 @@ public class TaakServiceImpl implements TaakService{
         taak.setDatum(localDateTime);
     }
 
+    @Override
+    public void addSubtaak(Taak taak, int id) {
+        getTaak(id).addSubTaak(taak);
+    }
+
+    @Override
+    public List<Taak> getSubtaken(int id) {
+        return getTaak(id).getSubtaken();
+    }
+
     public List<Taak> getTaken() {
         return taken;
     }

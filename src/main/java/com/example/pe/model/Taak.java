@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Taak {
     @NotEmpty
@@ -12,12 +14,14 @@ public class Taak {
     //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datum;
     private int id;
+    private List<Taak> subtaken;
 
     public Taak (String naam, LocalDateTime datum, String description) {
         setNaam(naam);
         setDatum(datum);
         setDescription(description);
         setTijdVdDag();
+        subtaken = new ArrayList<>();
     }
 
     public void setNaam(String naam) {
@@ -51,6 +55,14 @@ public class Taak {
         } else {
             this.description = description;
         }
+    }
+
+    public void addSubTaak(Taak taak) {
+        subtaken.add(taak);
+    }
+
+    public List<Taak> getSubtaken() {
+        return subtaken;
     }
 
     public void setId(int id) {

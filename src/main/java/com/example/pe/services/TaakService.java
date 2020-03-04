@@ -11,4 +11,6 @@ public interface TaakService {
     void addTask(Taak taak);
     int getLastId();
     void editTaak(String naam, String description, LocalDateTime localDateTime, int id);
+    void addSubtaak(Taak taak, int id);
+    List<Taak> getSubtaken (int id);
 }
