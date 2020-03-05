@@ -14,7 +14,9 @@
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-between">
         <ul class="navbar-nav">
-            <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
+            <li>
+                <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tasks">Tasks</a>
             </li>
@@ -44,7 +46,7 @@
             </tr>
             <tr>
                 <th class="thead-dark">Due date:</th>
-                <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()} + ' ' + ${task.tijdVdDag}"></td>
+                <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()}"></td>
             </tr>
         </table>
         <form th:action="${'/tasks/edit/' + task.id}" method="get">
@@ -63,7 +65,8 @@
             <br>
             <ul style="display: none" id="subTasks" class="w-100">
                 <th:block th:each="sub : ${subtaken}">
-                    <li class="list-group-item" th:text="${sub.naam} + ': due ' + ${sub.datum.getMonth()} + ' ' + ${sub.datum.getDayOfMonth()} + ' ' + ${sub.datum.getYear()} + ' at ' + ${sub.datum.getHour()} + ':' + ${sub.datum.getMinute()}  + ' ' + ${sub.tijdVdDag}"></li>
+                    <li class="list-group-item" th:text="${sub.naam}"></li>
+                    <img src="https://img.icons8.com/ios/50/000000/ok.png">
                 </th:block>
             </ul>
         </th:block>

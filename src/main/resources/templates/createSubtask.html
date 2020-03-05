@@ -14,7 +14,9 @@
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-between">
         <ul class="navbar-nav">
-            <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
+            <li>
+                <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tasks">Tasks</a>
             </li>
@@ -31,19 +33,20 @@
 <div class="d-flex justify-content-center">
     <main class="w-75 mt-3">
         <h2 th:text="'Creating subtask for ' + ${task.naam}"></h2>
-        <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="post" class="w-100">
-            <div class="form-group">
-                <label for="Naam">Naam</label>
-                <input type="text" id="Naam" name="naam" required class="form-control">
+        <form th:action="${'/tasks/sub/create'}" method="post" class="w-100" th:object="${taak}">
+            <div>
+                <p th:errors="*{naam}" class="alert alert-danger" role="alert"></p>
+                <p th:errors="*{description}" class="alert alert-danger" role="alert"></p>
             </div>
             <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea id="Description" name="description" required class="form-control" style="resize: none"></textarea>
+                <label for="naam">Naam</label>
+                <input type="text" th:field="*{naam}" required class="form-control">
             </div>
             <div class="form-group">
-                <label for="Datum">Due date</label>
-                <input type="datetime-local" id="Datum" name="datum" required class="form-control">
+                <label for="description">Description</label>
+                <textarea th:field="*{description}" required class="form-control" style="resize: none"></textarea>
             </div>
+            <input type="hidden" name="id" th:value="${taak.id}">
             <input type="Submit" value="Create" class="btn btn-primary mb-2">
         </form>
     </main>

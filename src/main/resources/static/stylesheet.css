@@ -17,6 +17,16 @@ a {
     padding: 20px;
 }
 
+li:hover {
+    background-color: white;
+    transition-duration: 0.3s;
+}
+
+a:hover {
+    color: #343a40;
+    transition-duration: 0.3s;
+}
+
 li {
     width: 30%;
     border: 2px solid white;

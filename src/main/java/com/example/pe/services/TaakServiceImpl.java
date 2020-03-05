@@ -1,5 +1,8 @@
 package com.example.pe.services;
 
+import com.example.pe.model.DTO.SubtaakDTO;
+import com.example.pe.model.DTO.TaakDTO;
+import com.example.pe.model.SubTaak;
 import com.example.pe.model.Taak;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -35,9 +38,8 @@ public class TaakServiceImpl implements TaakService{
     }
 
     @Override
-    public void addTask(Taak taak) {
-        taak.setId(getLastId()+1);
-        taken.add(taak);
+    public void addTask(Taak wegwerp) {
+        taken.add(wegwerp);
     }
 
     @Override
@@ -46,20 +48,23 @@ public class TaakServiceImpl implements TaakService{
     }
 
     @Override
-    public void editTaak(String naam, String description, LocalDateTime localDateTime, int id) {
-        Taak taak = this.getTaak(id);
-        taak.setNaam(naam);
-        taak.setDescription(description);
-        taak.setDatum(localDateTime);
+    public void editTaak(Taak wegwerp) {
+        Taak taak = this.getTaak(wegwerp.getId());
+        taak.setNaam(wegwerp.getNaam());
+        taak.setDescription(wegwerp.getDescription());
+        taak.setDatum(wegwerp.getDatum());
     }
 
     @Override
-    public void addSubtaak(Taak taak, int id) {
-        getTaak(id).addSubTaak(taak);
+    public void addSubtaak(SubtaakDTO wegwerp) {
+        SubTaak taak = new SubTaak();
+        taak.setNaam(wegwerp.getNaam());
+        taak.setDescription(wegwerp.getDescription());
+        getTaak(wegwerp.getId()).addSubTaak(taak);
     }
 
     @Override
-    public List<Taak> getSubtaken(int id) {
+    public List<SubTaak> getSubtaken(int id) {
         return getTaak(id).getSubtaken();
     }
 
