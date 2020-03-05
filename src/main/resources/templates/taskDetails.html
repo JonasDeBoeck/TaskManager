@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Task detail</title>
     <link rel="stylesheet" href="/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top justify-content-between">
         <ul class="navbar-nav">
             <li>
-                <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
+                <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png"
+                                                      style="width: 30px; height: 30px"></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tasks">Tasks</a>
@@ -31,51 +39,64 @@
     </nav>
 </header>
 <div class="d-flex justify-content-center">
-<main class="w-75 mt-3">
-    <article class="w-100">
-    <h2>Task detail</h2>
-    <th:block th:if="${task != null}">
-        <table class="table">
-            <tr>
-                <th class="thead-dark">Title:</th>
-                <td th:text="${task.naam}"></td>
-            </tr>
-            <tr>
-                <th class="thead-dark">Description:</th>
-                <td th:text="${task.description}"></td>
-            </tr>
-            <tr>
-                <th class="thead-dark">Due date:</th>
-                <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()}"></td>
-            </tr>
-        </table>
-        <form th:action="${'/tasks/edit/' + task.id}" method="get">
-            <input type="submit" value="Edit" class="btn btn-primary mb-2">
-        </form>
-        <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="get">
-            <input type="submit" value="Create subtask" class="btn btn-primary mb-2">
-        </form>
-        <th:block th:if="${not #lists.isEmpty(subtaken)}">
-            <div id="downArrow">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12zm-18.005-1.568l1.415-1.414 4.59 4.574 4.579-4.574 1.416 1.414-5.995 5.988-6.005-5.988z"/></svg>
-            </div>
-            <div id="upArrow" style="display: none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 7.58l5.995 5.988-1.416 1.414-4.579-4.574-4.59 4.574-1.416-1.414 6.006-5.988z"/></svg>
-            </div>
-            <br>
-            <ul style="display: none" id="subTasks" class="w-100">
-                <th:block th:each="sub : ${subtaken}">
-                    <li class="list-group-item" th:text="${sub.naam}"></li>
-                    <img src="https://img.icons8.com/ios/50/000000/ok.png">
+    <main class="w-75 mt-3">
+        <article class="w-100">
+            <h2>Task detail</h2>
+            <th:block th:if="${task != null}">
+                <table class="table">
+                    <tr>
+                        <th class="thead-dark">Title:</th>
+                        <td th:text="${task.naam}"></td>
+                    </tr>
+                    <tr>
+                        <th class="thead-dark">Description:</th>
+                        <td th:text="${task.description}"></td>
+                    </tr>
+                    <tr>
+                        <th class="thead-dark">Due date:</th>
+                        <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()}"></td>
+                    </tr>
+                </table>
+                <form th:action="${'/tasks/edit/' + task.id}" method="get">
+                    <input type="submit" value="Edit" class="btn btn-primary mb-2">
+                </form>
+                <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="get">
+                    <input type="submit" value="Create subtask" class="btn btn-primary mb-2">
+                </form>
+                <th:block th:if="${not #lists.isEmpty(subtaken)}">
+                    <div id="downArrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M24 12c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12zm-18.005-1.568l1.415-1.414 4.59 4.574 4.579-4.574 1.416 1.414-5.995 5.988-6.005-5.988z"/>
+                        </svg>
+                    </div>
+                    <div id="upArrow" style="display: none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 7.58l5.995 5.988-1.416 1.414-4.579-4.574-4.59 4.574-1.416-1.414 6.006-5.988z"/>
+                        </svg>
+                    </div>
+                    <br>
+                    <ul style="display: none" id="subTasks" class="w-100">
+                        <th:block th:each="sub : ${subtaken}">
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p th:text="${sub.naam}" class="mb-0"></p>
+                                    <div>
+                                        <img width="24" height="24" src="https://img.icons8.com/ios/50/000000/info.png">
+                                        <img width="24" height="24"
+                                             src="https://img.icons8.com/pastel-glyph/64/000000/cancel.png">
+                                        <img width="24" height="24" src="https://img.icons8.com/ios/50/000000/ok.png">
+                                    </div>
+                                </div>
+                            </li>
+                        </th:block>
+                    </ul>
                 </th:block>
-            </ul>
-        </th:block>
-    </th:block>
-    <th:block th:if="${task == null}">
-        <p>Task not found</p>
-    </th:block>
-    </article>
-</main>
+            </th:block>
+            <th:block th:if="${task == null}">
+                <p>Task not found</p>
+            </th:block>
+        </article>
+    </main>
 </div>
 <script src="/subtasks.js"></script>
 </body>
