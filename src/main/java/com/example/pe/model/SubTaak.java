@@ -5,10 +5,12 @@ import javax.validation.constraints.NotEmpty;
 public class SubTaak {
     @NotEmpty
     private String naam, description;
+    private boolean done;
 
     public SubTaak(String naam, String description) {
         setNaam(naam);
         setDescription(description);
+        done = false;
     }
 
     public SubTaak() {}
@@ -27,5 +29,13 @@ public class SubTaak {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
