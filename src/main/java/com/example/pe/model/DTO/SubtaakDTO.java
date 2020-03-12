@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 public class SubtaakDTO {
     @NotEmpty
     private String naam, description;
-    int id;
+    private long id;
 
     public SubtaakDTO() {}
 
@@ -25,11 +25,11 @@ public class SubtaakDTO {
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

@@ -4,13 +4,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+
 public class TaakDTO {
     @NotEmpty
     private String naam, description;
     //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull
     private LocalDateTime datum;
-    private int id;
+    private long id;
 
     public TaakDTO() {}
 
@@ -38,11 +39,11 @@ public class TaakDTO {
         this.datum = datum;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

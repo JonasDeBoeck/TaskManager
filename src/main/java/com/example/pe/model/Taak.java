@@ -1,20 +1,23 @@
 package com.example.pe.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Taak {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @NotEmpty
     private String naam, description;
-    //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull
     private LocalDateTime datum;
-    private int id;
+    @OneToMany(mappedBy = "taak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SubTaak> subtaken;
 
     public Taak (String naam, LocalDateTime datum, String description) {
@@ -46,7 +49,7 @@ public class Taak {
         return subtaken;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -54,7 +57,7 @@ public class Taak {
         return description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

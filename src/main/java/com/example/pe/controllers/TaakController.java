@@ -3,6 +3,7 @@ package com.example.pe.controllers;
 import com.example.pe.model.DTO.SubtaakDTO;
 import com.example.pe.model.DTO.TaakDTO;
 import com.example.pe.model.Taak;
+import com.example.pe.services.SubtaakService;
 import com.example.pe.services.TaakService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ import java.time.LocalDateTime;
 @Controller
 public class TaakController {
     private TaakService taakService;
+    private SubtaakService subtaakService;
 
     @Autowired
-    public TaakController (TaakService taakService) {
+    public TaakController (TaakService taakService, SubtaakService subtaakService) {
         this.taakService = taakService;
+        this.subtaakService = subtaakService;
     }
 
     @GetMapping("/tasks")
@@ -37,14 +40,13 @@ public class TaakController {
 
     @GetMapping("/tasks/new")
     public String showAddTask(Model model) {
-        model.addAttribute("id", taakService.getLastId());
-        Taak taak = new Taak();
+        TaakDTO taak = new TaakDTO();
         model.addAttribute("taak", taak);
         return "addTask";
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute @Valid Taak taak, BindingResult bindingResult){
+    public String addTask(@ModelAttribute @Valid TaakDTO taak, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "addTask";
         }
@@ -64,7 +66,7 @@ public class TaakController {
     }
 
     @PostMapping("/tasks/edit")
-    public String editTask (@ModelAttribute @Valid Taak taak, BindingResult bindingResult, Model model) {
+    public String editTask (@ModelAttribute @Valid TaakDTO taak, BindingResult bindingResult, Model model) {
         model.addAttribute("taak", taak);
         if (bindingResult.hasErrors()) {
             return "editTask";
@@ -89,7 +91,7 @@ public class TaakController {
         if (bindingResult.hasErrors()) {
             return "createSubtask";
         }
-        taakService.addSubtaak(taak);
+        subtaakService.addSubtask(taak);
         return "redirect:/tasks/" + taak.getId();
     }
 

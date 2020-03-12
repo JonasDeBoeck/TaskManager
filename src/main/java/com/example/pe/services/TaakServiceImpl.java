@@ -1,85 +1,67 @@
 package com.example.pe.services;
 
-import com.example.pe.model.DTO.SubtaakDTO;
 import com.example.pe.model.DTO.TaakDTO;
 import com.example.pe.model.SubTaak;
 import com.example.pe.model.Taak;
+import com.example.pe.repositories.SubtaakRepository;
+import com.example.pe.repositories.TaakRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component
 public class TaakServiceImpl implements TaakService{
-    private List<Taak> taken;
+    private TaakRepository taakRepository;
+    private SubtaakRepository subtaakRepository;
 
-    public TaakServiceImpl() {
-        taken = new ArrayList<>();
-        taken.add(new Taak("Task1", LocalDateTime.of(LocalDate.of(2020, 3, 20), LocalTime.of(10,0,0)), "Lorem ipsum dolor amet et"));
-        taken.add(new Taak("Task2", LocalDateTime.of(LocalDate.of(2020, 3, 21), LocalTime.of(18,0,0)), "Lorem ipsum dolor amet et"));
-        taken.add(new Taak("Task3", LocalDateTime.of(LocalDate.of(2020, 3, 27), LocalTime.of(17,0,0)), "Lorem ipsum dolor amet et"));
-        taken.get(0).setId(1);
-        taken.get(1).setId(2);
-        taken.get(2).setId(3);
+    @Autowired
+    public TaakServiceImpl(TaakRepository taakRepository, SubtaakRepository subtaakRepository) {
+        this.taakRepository = taakRepository;
+        this.subtaakRepository = subtaakRepository;
+        //Testing purposes
+        TaakDTO taakDTO = new TaakDTO();
+        taakDTO.setNaam("Task1");
+        taakDTO.setDescription("Lorum Ipsum");
+        taakDTO.setDatum(LocalDateTime.of(2020, 12, 3, 12, 30));
+        addTask(taakDTO);
     }
 
-    public Taak getTaak(int id) {
-        for (Taak taak : taken) {
-            if (id == taak.getId()) {
-                return taak;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void addTask(Taak wegwerp) {
-        taken.add(wegwerp);
+    public Taak getTaak(long id) {
+        Optional<Taak> taakOptional = taakRepository.findById(id);
+        return taakOptional.orElse(null);
     }
 
     @Override
-    public int getLastId() {
-        return taken.get(taken.size()-1).getId();
-    }
-
-    @Override
-    public void editTaak(Taak wegwerp) {
-        Taak taak = this.getTaak(wegwerp.getId());
+    public void addTask(TaakDTO wegwerp) {
+        Taak taak = new Taak();
         taak.setNaam(wegwerp.getNaam());
         taak.setDescription(wegwerp.getDescription());
         taak.setDatum(wegwerp.getDatum());
+        taakRepository.save(taak);
     }
 
     @Override
-    public void addSubtaak(SubtaakDTO wegwerp) {
-        SubTaak taak = new SubTaak();
-        taak.setNaam(wegwerp.getNaam());
-        taak.setDescription(wegwerp.getDescription());
-        getTaak(wegwerp.getId()).addSubTaak(taak);
+    public void editTaak(TaakDTO wegwerp) {
+        taakRepository.editTaak(wegwerp.getNaam(), wegwerp.getDescription(), wegwerp.getDatum(), wegwerp.getId());
     }
 
     @Override
-    public List<SubTaak> getSubtaken(int id) {
-        return getTaak(id).getSubtaken();
+    public List<SubTaak> getSubtaken(long id) {
+        Taak taak = getTaak(id);
+        return subtaakRepository.findByTaak(taak);
     }
 
     @Override
     public List<Taak> searchTaak(String naam) {
-        List<Taak> juisteNaam = new ArrayList<>();;
-        for (Taak taak : taken) {
-            if (taak.getNaam().equals(naam)) {
-                juisteNaam.add(taak);
-            }
-        }
-        return juisteNaam;
+        return taakRepository.findByNaam(naam);
     }
 
     public List<Taak> getTaken() {
-        return taken;
+        return taakRepository.findAll();
     }
 }
