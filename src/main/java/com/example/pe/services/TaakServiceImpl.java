@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +22,6 @@ public class TaakServiceImpl implements TaakService{
     public TaakServiceImpl(TaakRepository taakRepository, SubtaakRepository subtaakRepository) {
         this.taakRepository = taakRepository;
         this.subtaakRepository = subtaakRepository;
-        //Testing purposes
-        TaakDTO taakDTO = new TaakDTO();
-        taakDTO.setNaam("Task1");
-        taakDTO.setDescription("Lorum Ipsum");
-        taakDTO.setDatum(LocalDateTime.of(2020, 12, 3, 12, 30));
-        addTask(taakDTO);
     }
 
     public Taak getTaak(long id) {
