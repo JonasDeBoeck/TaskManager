@@ -1,5 +1,7 @@
 package com.example.pe.controllers;
 
+import com.example.pe.formatters.SubtaakFormatter;
+import com.example.pe.formatters.TaakFormatter;
 import com.example.pe.model.DTO.SubtaakDTO;
 import com.example.pe.model.DTO.TaakDTO;
 import com.example.pe.model.Taak;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TaakController {
@@ -27,14 +31,14 @@ public class TaakController {
 
     @GetMapping("/tasks")
     public String showTasks (Model model) {
-        model.addAttribute("tasks", taakService.getTaken());
+        model.addAttribute("tasks", TaakFormatter.dtoListToTaakList(taakService.getTaken()));
         return "tasks";
     }
 
     @GetMapping("/tasks/{id}")
     public String showTaskDetails (Model model, @PathVariable("id") int id) {
-        model.addAttribute("task", taakService.getTaak(id));
-        model.addAttribute("subtaken", taakService.getTaak(id).getSubtaken());
+        model.addAttribute("task", TaakFormatter.dtoToTaak(taakService.getTaak(id)));
+        model.addAttribute("subtaken", SubtaakFormatter.dtoListToSubtaakList(taakService.getSubtaken(id)));
         return "taskDetails";
     }
 
@@ -46,7 +50,7 @@ public class TaakController {
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute @Valid TaakDTO taak, BindingResult bindingResult){
+    public String addTask(@ModelAttribute("taak") @Valid TaakDTO taak, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "addTask";
         }
@@ -66,8 +70,7 @@ public class TaakController {
     }
 
     @PostMapping("/tasks/edit")
-    public String editTask (@ModelAttribute @Valid TaakDTO taak, BindingResult bindingResult, Model model) {
-        model.addAttribute("taak", taak);
+    public String editTask (@ModelAttribute("taak") @Valid TaakDTO taak, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "editTask";
         }
@@ -97,7 +100,7 @@ public class TaakController {
 
     @GetMapping("/tasks/search")
     public String searchTask (Model model, @RequestParam(name = "naam")String naam) {
-        model.addAttribute("gevonden", taakService.searchTaak(naam));
+        model.addAttribute("gevonden", TaakFormatter.dtoListToTaakList(taakService.searchTaak(naam)));
         return "searchResultaat";
     }
 }

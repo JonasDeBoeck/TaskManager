@@ -8,10 +8,11 @@ import com.example.pe.model.Taak;
 import java.util.List;
 
 public interface TaakService {
-    List<Taak> getTaken();
-    Taak getTaak(long id);
-    void addTask(TaakDTO taak);
-    void editTaak(TaakDTO taak);
-    List<SubTaak> getSubtaken (long id);
-    List<Taak> searchTaak (String naam);
+    List<TaakDTO> getTaken();
+    TaakDTO getTaak(long id);
+    TaakDTO addTask(TaakDTO taak);
+    TaakDTO editTaak(TaakDTO taak);
+    List<SubtaakDTO> getSubtaken (long id);
+    List<TaakDTO> searchTaak (String naam);
+    TaakDTO removeTaak(long id);
 }

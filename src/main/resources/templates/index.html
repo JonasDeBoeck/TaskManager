@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,12 +15,20 @@
     <ul>
         <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/96/000000/todo-list.png"></a>
         <li>
-            <a href="/tasks">Tasks</a>
+            <a href="/tasks" th:text="#{tasks}"></a>
         </li>
         <li>
-            <a href="/tasks/new">Add</a>
+            <a href="/tasks/new" th:text="#{add}"></a>
+        </li>
+        <li>
+            <p class="lang">NL</p>
+        </li>
+        <li>
+            <p class="lang">ENG</p>
         </li>
     </ul>
 </nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/language.js"></script>
 </body>
 </html>

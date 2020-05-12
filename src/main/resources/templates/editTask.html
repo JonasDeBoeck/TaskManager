@@ -18,16 +18,20 @@
                 <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/tasks" th:text="#{tasks}"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks/new">Add</a>
+                <a class="nav-link" href="/tasks/new" th:text="#{add}"></a>
             </li>
         </ul>
-        <form class="form-inline" action="/tasks/search" method="get">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="d-flex flex-row">
+            <button class="lang mr-2 btn btn-primary">NL</button>
+            <button class="lang mr-2 btn btn-primary">ENG</button>
+            <form class="form-inline" action="/tasks/search" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
+            </form>
+        </div>
     </nav>
 </header>
 <div class="d-flex justify-content-center">
@@ -39,21 +43,23 @@
                 <p th:errors="*{datum}" class="alert alert-danger" role="alert"></p>
             </div>
             <div class="form-group">
-                <label for="naam">Naam</label>
+                <label for="naam" th:text="#{name}"></label>
                 <input type="text" th:field="*{naam}" required class="form-control">
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description" th:text="#{description}"></label>
                 <textarea th:field="*{description}" required class="form-control" style="resize: none"></textarea>
             </div>
             <div class="form-group">
-                <label for="datum">Due date</label>
+                <label for="datum" th:text="#{date}"></label>
                 <input type="datetime-local" th:field="*{datum}" required class="form-control">
             </div>
             <input type="hidden" th:value="${taak.id}" name="id">
-            <input type="Submit" value="Change" class="btn btn-primary mb-2">
+            <input type="Submit" th:value="#{edit}" class="btn btn-primary mb-2">
         </form>
     </main>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/language.js"></script>
 </body>
 </html>

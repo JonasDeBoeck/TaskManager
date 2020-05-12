@@ -16,15 +16,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <style>
-        .done {
-            background-color: lightgreen;
-        }
-
-        .notDone {
-            background-color: lightcoral;
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -35,42 +26,46 @@
                                                       style="width: 30px; height: 30px"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/tasks" th:text="#{tasks}"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks/new">Add</a>
+                <a class="nav-link" href="/tasks/new" th:text="#{add}"></a>
             </li>
         </ul>
-        <form class="form-inline" action="/tasks/search" method="get">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="d-flex flex-row">
+            <button class="lang mr-2 btn btn-primary">NL</button>
+            <button class="lang mr-2 btn btn-primary">ENG</button>
+            <form class="form-inline" action="/tasks/search" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
+            </form>
+        </div>
     </nav>
 </header>
 <div class="d-flex justify-content-center">
     <main class="w-75 mt-3">
         <article class="w-100">
-            <h2>Task detail</h2>
+            <h2 th:text="#{taskDetails}"></h2>
             <th:block th:if="${task != null}">
                 <table class="table">
                     <tr>
-                        <th class="thead-dark">Title:</th>
+                        <th class="thead-dark" th:text="#{title}"></th>
                         <td th:text="${task.naam}"></td>
                     </tr>
                     <tr>
-                        <th class="thead-dark">Description:</th>
+                        <th class="thead-dark" th:text="#{description}"></th>
                         <td th:text="${task.description}"></td>
                     </tr>
                     <tr>
-                        <th class="thead-dark">Due date:</th>
+                        <th class="thead-dark" th:text="#{date}"></th>
                         <td th:text="${task.datum.getMonth()} + ' ' + ${task.datum.getDayOfMonth()} + ' ' + ${task.datum.getYear()} + ' at ' + ${task.datum.getHour()} + ':' + ${task.datum.getMinute()}"></td>
                     </tr>
                 </table>
                 <form th:action="${'/tasks/edit/' + task.id}" method="get">
-                    <input type="submit" value="Edit" class="btn btn-primary mb-2">
+                    <input type="submit" th:value="#{edit}" class="btn btn-primary mb-2">
                 </form>
                 <form th:action="${'/tasks/' + task.id + '/sub/create'}" method="get">
-                    <input type="submit" value="Create subtask" class="btn btn-primary mb-2">
+                    <input type="submit" th:value="#{createSubtask}" class="btn btn-primary mb-2">
                 </form>
                 <th:block th:if="${not #lists.isEmpty(subtaken)}">
                     <div id="downArrow">
@@ -86,18 +81,9 @@
                     <br>
                     <ul style="display: none" id="subTasks" class="w-100">
                         <th:block th:each="sub : ${subtaken}">
-                            <li class="list-group-item" th:classappend="${sub.isDone()} ? done : notDone">
+                            <li class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p th:text="${sub.naam}" class="mb-0"></p>
-                                    <div>
-                                        <img width="24" height="24" src="https://img.icons8.com/ios/50/000000/info.png" class="info">
-                                        <img width="24" height="24"
-                                             src="https://img.icons8.com/pastel-glyph/64/000000/cancel.png">
-                                        <img width="24" height="24" src="https://img.icons8.com/ios/50/000000/ok.png" id="done">
-                                    </div>
-                                    <div style="display: none">
-                                        <p th:text="${sub.description}"></p>
-                                    </div>
                                 </div>
                             </li>
                         </th:block>
@@ -105,11 +91,13 @@
                 </th:block>
             </th:block>
             <th:block th:if="${task == null}">
-                <p>Task not found</p>
+                <p th:text="#notfound"></p>
             </th:block>
         </article>
     </main>
 </div>
 <script src="/subtasks.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/language.js"></script>
 </body>
 </html>

@@ -27,6 +27,17 @@ public class SubTaak {
         setTaak(taak);
     }
 
+    public boolean equals (Object o) {
+        boolean eq = false;
+        if (o instanceof SubTaak) {
+            SubTaak subTaak = (SubTaak) o;
+            if (subTaak.naam.equals(this.naam) && subTaak.description.equals(this.description)) {
+                eq = true;
+            }
+        }
+        return eq;
+    }
+
     public SubTaak() {
         done = false;
     }

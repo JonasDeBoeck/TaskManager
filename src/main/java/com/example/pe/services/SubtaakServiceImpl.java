@@ -22,11 +22,16 @@ public class SubtaakServiceImpl implements SubtaakService {
     }
 
     @Override
-    public void addSubtask(SubtaakDTO subtaakDTO) {
+    public SubtaakDTO addSubtask(SubtaakDTO subtaakDTO) {
         SubTaak subtaak = new SubTaak();
         subtaak.setNaam(subtaakDTO.getNaam());
         subtaak.setDescription(subtaakDTO.getDescription());
         subtaak.setTaak(taakRepository.findById(subtaakDTO.getId()).orElse(null));
         taakRepository.findById(subtaakDTO.getId()).map(post -> subtaakRepository.save(subtaak)).orElseThrow(() -> new RepoException("Taak niet gevonden"));
+        return subtaakDTO;
+    }
+
+    public void clearRepo() {
+        subtaakRepository.deleteAll();
     }
 }

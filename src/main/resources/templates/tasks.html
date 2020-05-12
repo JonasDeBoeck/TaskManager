@@ -25,16 +25,20 @@
                 <a class="navbar-brand" href="/"><img src="https://img.icons8.com/color/48/000000/todo-list.png" style="width: 30px; height: 30px"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/tasks" th:text="#{tasks}">Tasks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks/new">Add</a>
+                <a class="nav-link" href="/tasks/new" th:text="#{add}">Add</a>
             </li>
         </ul>
-        <form class="form-inline" action="/tasks/search" method="get">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="d-flex flex-row">
+            <button class="lang mr-2 btn btn-primary">NL</button>
+            <button class="lang mr-2 btn btn-primary">ENG</button>
+            <form class="form-inline" action="/tasks/search" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
+            </form>
+        </div>
     </nav>
 </header>
 <div class="d-flex justify-content-center mt-3">
@@ -45,10 +49,12 @@
                    th:text="${taak.naam} + ': due ' + ${taak.datum.getMonth()} + ' ' + ${taak.datum.getDayOfMonth()} + ' ' + ${taak.datum.getYear()} + ' at ' + ${taak.datum.getHour()} + ':' + ${taak.datum.getMinute()}"></a>
             </th:block>
             <th:block th:if="${#lists.isEmpty(tasks)}">
-                <p>There are no tasks left to do.</p>
+                <p th:text="#{noTasks}"></p>
             </th:block>
         </ul>
     </main>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/language.js"></script>
 </body>
 </html>

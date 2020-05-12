@@ -8,6 +8,18 @@ ul {
     height: 100%;
 }
 
+.lang {
+    font-size: 70px;
+    padding: 20px;
+    color: white;
+}
+
+.lang:hover {
+    color: #343a40;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
 a {
     display: block;
     font-size: 70px;
@@ -33,7 +45,7 @@ li {
     text-align: center;
 }
 
-li:nth-of-type(2) {
+li:nth-of-type(2), li:nth-of-type(3), li:nth-of-type(4) {
     margin-top: 60px;
 }
 

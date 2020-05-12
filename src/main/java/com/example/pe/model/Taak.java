@@ -29,6 +29,18 @@ public class Taak {
 
     public Taak() {}
 
+    @Override
+    public boolean equals (Object o) {
+        boolean eq = false;
+        if (o instanceof Taak) {
+            Taak taak = (Taak) o;
+            if (taak.naam.equals(this.naam) && taak.description.equals(this.description) && taak.datum.equals(this.datum)) {
+                eq = true;
+            }
+        }
+        return eq;
+    }
+
     public void setNaam(String naam) {
             this.naam = naam;
     }
