@@ -88,9 +88,8 @@ public class TaakController {
     }
 
     @PostMapping("/tasks/sub/create")
-    public String addSubtask(@ModelAttribute @Valid SubtaakDTO taak, BindingResult bindingResult, Model model) {
+    public String addSubtask(@ModelAttribute (name = "taak") @Valid SubtaakDTO taak, BindingResult bindingResult, Model model) {
         model.addAttribute("task", taakService.getTaak(taak.getId()));
-        model.addAttribute("taak", taak);
         if (bindingResult.hasErrors()) {
             return "createSubtask";
         }

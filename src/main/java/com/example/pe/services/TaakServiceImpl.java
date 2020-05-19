@@ -28,7 +28,7 @@ public class TaakServiceImpl implements TaakService{
         this.subtaakRepository = subtaakRepository;
         TaakDTO taakDTO = new TaakDTO();
         taakDTO.setNaam("Test");
-        taakDTO.setDatum(LocalDateTime.now());
+        taakDTO.setDatum(LocalDateTime.of(2020, 2, 4, 12, 13));
         taakDTO.setDescription("Test");
         addTask(taakDTO);
     }

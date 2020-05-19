@@ -5,8 +5,10 @@ import com.example.pe.model.Taak;
 import javax.validation.constraints.NotEmpty;
 
 public class SubtaakDTO {
-    @NotEmpty
-    private String naam, description;
+    @NotEmpty (message = "Name can not be empty!")
+    private String naam;
+    @NotEmpty (message = "Description can not be empty!")
+    private String description;
     private long id;
     private boolean isDone;
     private Taak taak;

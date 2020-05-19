@@ -13,9 +13,11 @@ public class Taak {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotEmpty
-    private String naam, description;
-    @NotNull
+    @NotEmpty (message = "Name cannot be empty!")
+    private String naam;
+    @NotEmpty (message = "Description cannot be empty!")
+    private String description;
+    @NotNull (message = "Date cannot be empty!")
     private LocalDateTime datum;
     @OneToMany(mappedBy = "taak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SubTaak> subtaken;

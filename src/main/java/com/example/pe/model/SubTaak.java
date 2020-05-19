@@ -12,8 +12,10 @@ public class SubTaak {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @NotEmpty
-    private String naam, description;
+    @NotEmpty (message = "Name can not be empty!")
+    private String naam;
+    @NotEmpty (message = "Description can not be empty!")
+    private String description;
     private boolean done;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)

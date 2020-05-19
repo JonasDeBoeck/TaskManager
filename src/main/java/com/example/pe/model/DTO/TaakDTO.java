@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 
 
 public class TaakDTO {
-    @NotEmpty
-    private String naam, description;
+    @NotEmpty (message = "Name cannot be empty!")
+    private String naam;
+    @NotEmpty (message = "Description cannot be empty!")
+    private String description;
     //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @NotNull
+    @NotNull (message = "Date cannot be empty!")
     private LocalDateTime datum;
     private long id;
 
