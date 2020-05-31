@@ -37,9 +37,16 @@ public class TaakController {
 
     @GetMapping("/tasks/{id}")
     public String showTaskDetails (Model model, @PathVariable("id") int id) {
-        model.addAttribute("task", TaakFormatter.dtoToTaak(taakService.getTaak(id)));
-        model.addAttribute("subtaken", SubtaakFormatter.dtoListToSubtaakList(taakService.getSubtaken(id)));
-        return "taskDetails";
+        TaakDTO taak = taakService.getTaak(id);
+        if (taak.getId() == -13) {
+            model.addAttribute("error", "The task you searched for doesn't exist!");
+            model.addAttribute("tasks", TaakFormatter.dtoListToTaakList(taakService.getTaken()));
+            return "tasks";
+        } else {
+            model.addAttribute("task", TaakFormatter.dtoToTaak(taak));
+            model.addAttribute("subtaken", SubtaakFormatter.dtoListToSubtaakList(taakService.getSubtaken(id)));
+            return "taskDetails";
+        }
     }
 
     @GetMapping("/tasks/new")

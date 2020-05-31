@@ -28,7 +28,7 @@
             <button class="lang mr-2 btn btn-primary">NL</button>
             <button class="lang mr-2 btn btn-primary">ENG</button>
             <form class="form-inline" action="/tasks/search" method="get">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <input class="form-control mr-sm-2" type="search" th:placeholder="#{Name}" aria-label="Search" name="naam">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
             </form>
         </div>
@@ -36,7 +36,7 @@
 </header>
 <div class="d-flex justify-content-center">
     <main class="w-75 mt-3">
-        <h2 th:text="'Creating subtask for ' + ${task.naam}"></h2>
+        <h2 th:text="#{CreateSub}"></h2>
         <form th:action="${'/tasks/sub/create'}" method="post" class="w-100" th:object="${taak}">
             <div>
                 <p th:errors="*{naam}" class="alert alert-danger" role="alert"></p>

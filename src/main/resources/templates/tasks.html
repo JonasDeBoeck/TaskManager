@@ -35,7 +35,7 @@
             <button class="lang mr-2 btn btn-primary">NL</button>
             <button class="lang mr-2 btn btn-primary">ENG</button>
             <form class="form-inline" action="/tasks/search" method="get">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <input class="form-control mr-sm-2" type="search" th:placeholder="#{Name}" aria-label="Search" name="naam">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
             </form>
         </div>
@@ -43,6 +43,10 @@
 </header>
 <div class="d-flex justify-content-center mt-3">
     <main class="w-75">
+        <th:block th:if="${error != null}">
+            <p th:text="#{TaskNotExist}" class="alert alert-danger" role="alert">
+            </p>
+        </th:block>
         <ul class="w-100">
             <th:block th:if="${not #lists.isEmpty(tasks)}" th:each="taak : ${tasks}">
                 <a th:href="@{/tasks/{id}(id = ${taak.id})}" class="list-group-item"

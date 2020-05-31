@@ -36,7 +36,7 @@
             <button class="lang mr-2 btn btn-primary">NL</button>
             <button class="lang mr-2 btn btn-primary">ENG</button>
             <form class="form-inline" action="/tasks/search" method="get">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="naam">
+                <input class="form-control mr-sm-2" type="search" th:placeholder="#{Name}" aria-label="Search" name="naam">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{search}"></button>
             </form>
         </div>
@@ -68,6 +68,7 @@
                     <input type="submit" th:value="#{createSubtask}" class="btn btn-primary mb-2">
                 </form>
                 <th:block th:if="${not #lists.isEmpty(subtaken)}">
+                    <p th:text="#{buttonClick}"></p>
                     <div id="downArrow">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M24 12c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12zm-18.005-1.568l1.415-1.414 4.59 4.574 4.579-4.574 1.416 1.414-5.995 5.988-6.005-5.988z"/>
@@ -83,9 +84,9 @@
                         <th:block th:each="sub : ${subtaken}">
                             <li class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-0"><strong>Name: </strong> <span th:text="${sub.naam}"></span></p>
+                                    <p class="mb-0"><strong th:text="#{name}"> </strong> <span th:text="${sub.naam}"></span></p>
                                     <div style="flex-basis: 50%">
-                                        <p class="mb-0"><strong>Description: </strong> <span th:text="${sub.description}"></span></p>
+                                        <p class="mb-0"><strong th:text="#{description}"> </strong> <span th:text="${sub.description}"></span></p>
                                     </div>
                                 </div>
                             </li>

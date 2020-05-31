@@ -54,7 +54,7 @@
         <label for="datum" th:text="#{date}">Due date</label>
         <input type="datetime-local" th:field="*{datum}" required class="form-control">
     </div>
-    <input type="Submit" value="Add task" class="btn btn-primary mb-2">
+    <input type="Submit" th:value="#{Add}" class="btn btn-primary mb-2">
 </form>
 </main>
 </div>

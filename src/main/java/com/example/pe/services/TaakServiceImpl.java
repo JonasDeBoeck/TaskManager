@@ -35,8 +35,9 @@ public class TaakServiceImpl implements TaakService{
 
     public TaakDTO getTaak(long id) {
         Optional<Taak> taakOptional = taakRepository.findById(id);
-        assert taakOptional.orElse(null) != null;
-        return TaakFormatter.taakToDTO(taakOptional.orElse(null));
+        Taak taak = new Taak();
+        taak.setId(-13);
+        return TaakFormatter.taakToDTO(taakOptional.orElse(taak));
     }
 
     @Override
